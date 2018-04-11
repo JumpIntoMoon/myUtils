@@ -1,0 +1,65 @@
+<!DOCTYPE web-app PUBLIC
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<!--配置web.xml，使其具有springmvc特性，主要配置两处，一个是ContextLoaderListener，一个是DispatcherServlet-->
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+    <display-name>Archetype Created Web Application</display-name>
+    <!--**********************************开始配置spring************************************-->
+    <!--spring自己的配置文件路径-->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath*:applicationContext.xml</param-value>
+    </context-param>
+    <!--配置ContextLoaderListener表示：该工程要以spring的方式启动。
+    启动时会默认在/WEB-INF目录下查找上面所配置路径下的applicationContext.xml作为spring容器的配置文件，该文件里可以初始化一些bean-->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <!--为了能够处理中文的post请求，再配置一个encodingFilter，以避免post请求中文出现乱码情况-->
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!--**********************************配置spring结束************************************-->
+    <!--********************************开始配置spring MVC**********************************-->
+    <!-- 配置DispatcherServlet表示：该工程将采用springmvc的方式启动。
+    启动时也会默认在/WEB-INF目录下查找XXX-servlet.xml作为配置文件，
+    XXX就是DispatcherServlet的名字，该文件中将配置两项重要的mvc特性：
+    1）HandlerMapping,负责为DispatcherServlet这个前端控制器的请求查找Controller；
+    2）ViewResolver,负责为DispatcherServlet查找ModelAndView的视图解析器。
+    此处使用指定的配置文件spring-mvc.xml -->
+    <servlet>
+        <servlet-name>springMVC</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <!--<param-value>/WEB-INF/classes/spring-mvc-servlet.xml</param-value>-->
+            <param-value>classpath*:/spring-mvc.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>springMVC</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    <!--********************************配置spring MVC结束**********************************-->
+    <!--首页-->
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+</web-app>
