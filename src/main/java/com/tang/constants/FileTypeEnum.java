@@ -33,5 +33,4 @@ public enum FileTypeEnum {
     public void setSuffix(String suffix) {
         this.suffix = suffix;
     }
-
 }
