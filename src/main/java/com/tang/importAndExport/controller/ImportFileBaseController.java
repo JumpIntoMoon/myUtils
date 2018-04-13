@@ -123,6 +123,7 @@ public class ImportFileBaseController {
             while (hasElement) {
                 List<Object> voList = new ArrayList<>();
                 for (int i = 0; i < batchDataSize; i++) {
+                    //take() 和 put() 都会阻塞,因此此处用take()，当队列中无数据可取时，将线程阻塞，防止出现空指针异常
                     Object object = producerQueue.take();
                     if (lastFlag.equals(object.toString())) {
                         hasElement = false;
