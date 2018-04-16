@@ -1,4 +1,4 @@
-package com.tang.annotationTransaction;
+package com.tang.customedAnnotationAspect;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -24,7 +24,7 @@ public class CustomedAnnotationAspect {
     /**
      * 注解拦截
      */
-    @Pointcut("@annotation(com.tang.annotationTransaction.CustomedAnnotation)")
+    @Pointcut("@annotation(com.tang.customedAnnotationAspect.CustomedAnnotation)")
     public void annotationPointcut() {
     }
 
