@@ -17,7 +17,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * @description: description
+ * @description: 生产者-消费者模式下的批量文件导入
  * @author: tangYiLong
  * @create: 2018-04-10 11:32
  **/
