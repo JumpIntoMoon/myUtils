@@ -43,7 +43,7 @@ public class ImportFileBaseController {
         //封装要显示到视图的数据
         mv.addObject("path", "/importXXX/import");
         //视图名
-        mv.setViewName("import");
+        mv.setViewName("testImport");
         return mv;
     }
 
