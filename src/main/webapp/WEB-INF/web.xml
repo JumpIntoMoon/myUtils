@@ -48,13 +48,56 @@
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <!--<param-value>/WEB-INF/classes/spring-mvc-servlet.xml</param-value>-->
+            <!--<param-value>/WEB-INF/classes/spring-mvc.xml</param-value>-->
             <param-value>classpath*:/spring-mvc.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>springMVC</servlet-name>
+        <!--
+        '/'代表只拦截以'/'结尾的请求（即所有请求），
+        以*.do结尾代表只拦截.do结尾的请求...
+        当这里的url=pattern配置为'/'时，代表所有请求都被拦截，然后把所有的请求都交给spring去处理了，
+        而所有available的请求url都是在Constroller里使用类似@RequestMapping(value = "/login/{user}", method = RequestMethod.GET)这样的注解配置的，
+        这样的话对js/css/jpg/gif等静态资源的访问就会得不到。
+
+        解决办法：
+
+        方案一：激活Tomcat的defaultServlet来处理静态文件
+        在web.xml里添加如下配置：
+        <servlet-mapping>
+            <servlet-name>default</servlet-name>
+            <url-pattern>*.jpg</url-pattern>
+        </servlet-mapping>
+        <servlet-mapping>
+            <servlet-name>default</servlet-name>
+            <url-pattern>*.js</url-pattern>
+        </servlet-mapping>
+        <servlet-mapping>
+            <servlet-name>default</servlet-name>
+            <url-pattern>*.css</url-pattern>
+        </servlet-mapping>
+
+        要配置多个，每种文件配置一个。
+        要写在DispatcherServlet的前面， 让defaultServlet先拦截，这个就不会进入Spring了，我想性能是最好的吧。
+        Tomcat, Jetty, JBoss, and GlassFish  默认 Servlet的名字  "default"
+        Google App Engine 默认 Servlet的名字  "_ah_default"
+        Resin 默认 Servlet的名字  "resin-file"
+        WebLogic 默认 Servlet的名字   "FileServlet"
+        WebSphere  默认 Servlet的名字  "SimpleFileServlet"
+
+        方案二： 在spring3.0.4以后版本提供了mvc:resources
+        <mvc:resources> 的使用方法：
+        <mvc:resources mapping="/images/**" location="/images/" />
+        /images/**映射到 ResourceHttpRequestHandler 进行处理，
+        location指定静态资源的位置.可以是web application根目录下、jar包里面，
+        这样可以把静态资源压缩到jar包中。
+        cache-period可以使得静态资源进行web cache。
+        如果出现下面的错误，可能是没有配置 <mvc:annotation-driven /> 的原因。
+        报错WARNING: No mapping found for HTTP request with URI [/mvc/user/findUser/lisi/770] in DispatcherServlet with name 'springMVC'
+
+        -->
         <url-pattern>/</url-pattern>
     </servlet-mapping>
     <!--********************************配置spring MVC结束**********************************-->
