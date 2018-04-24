@@ -11,7 +11,7 @@
 
     <name>utils Maven Webapp</name>
     <!-- FIXME change it to the project's website -->
-    <url>http://www.example.com</url>
+    <url>https://github.com/JumpIntoMoon/myUtils.git</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -148,6 +148,7 @@
 
     <build>
         <finalName>utils</finalName>
+        <!--maven 的打包、编译等插件-->
         <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
             <plugins>
                 <plugin>
