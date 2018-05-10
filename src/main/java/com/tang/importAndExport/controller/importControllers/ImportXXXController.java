@@ -34,7 +34,7 @@ public class ImportXXXController extends ImportFileBaseController {
 
     @RequestMapping("/import")
     @ResponseBody
-    public String importFile(HttpServletRequest request){
+    public String importFile(HttpServletRequest request) {
         try {
             if (parseRequestOK(request)) {
                 //设置线程池和队列的大小，并初始化。可以根据实际情况调整输入值

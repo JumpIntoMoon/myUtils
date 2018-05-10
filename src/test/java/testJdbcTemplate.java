@@ -18,7 +18,7 @@ import java.util.Map;
 
 @RunWith(SpringJUnit4ClassRunner.class)//使项目从spring启动
 @ContextConfiguration("classpath:applicationContext.xml")//读取spring配置文件
-@WebAppConfiguration("")//静态资源根路径，不加该注解有可能造成启动异常
+@WebAppConfiguration("")//静态资源根路径，不加该注解时，如果spring配置文件中有静态资源路径，有可能造成启动异常
 public class testJdbcTemplate {
 
     private ApplicationContext ctx;

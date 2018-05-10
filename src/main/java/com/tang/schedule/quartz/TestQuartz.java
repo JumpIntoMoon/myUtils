@@ -1,12 +1,21 @@
 package com.tang.schedule.quartz;
 
+import org.springframework.stereotype.Component;
+
 /**
  * 任务调度类
+ *
  * @author: tangYiLong
  * @create: 2018-05-09 11:19
  **/
+@Component
 public class TestQuartz {
-    public static void main(String[] args) {
+
+    /**
+     * @param jobName job名称
+     * @param time    cron表达式
+     */
+    public void execute(String jobName, String time) {
         //addJob(任务名称, 具体需要完成的任务, 时间间隔 )
         //CronTrigger配置格式:[秒] [分] [小时] [日] [月] [周] [年]
         //0 0 12 * * ?              每天12点触发
@@ -27,6 +36,10 @@ public class TestQuartz {
         //0 15 10 ? * 6#3           每月的第三周的星期五开始触发
         //0 0 12 1/5 * ?            每月的第一个中午开始每隔5天触发一次
         //0 11 11 11 11 ?           每年的11月11号 11点11分触发(光棍节)
-        QuartzManager.addJob("Query persons", SwapJob.class, "0/5 * * * * ?");
+        QuartzManager.addJob(jobName, SimpleJob.class, time);
+    }
+
+    public static void main(String[] args) {
+        QuartzManager.addJob("Query persons", SimpleJob.class, "0/5 * * * * ?");
     }
 }

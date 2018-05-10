@@ -7,6 +7,7 @@ import java.util.Map;
 
 /**
  * 定时任务管理类
+ *
  * @author: tangYiLong
  * @create: 2018-05-09 10:34
  **/
@@ -15,39 +16,45 @@ public class QuartzManager {
     private static String JOB_GROUP_NAME = "FH_JOBGROUP_NAME";                      //任务组
     private static String TRIGGER_GROUP_NAME = "FH_TRIGGERGROUP_NAME";              //触发器组
 
-    /**添加一个定时任务，使用默认的任务组名，触发器名，触发器组名
+    /**
+     * 添加一个定时任务，使用默认的任务组名，触发器名，触发器组名
+     *
      * @param jobName 任务名
-     * @param cls 任务
-     * @param time 时间设置，参考quartz说明文档
+     * @param cls     任务
+     * @param time    时间设置，参考quartz说明文档
      */
     public static void addJob(String jobName, Class<? extends Job> cls, String time) {
         addJob(jobName, JOB_GROUP_NAME, jobName, TRIGGER_GROUP_NAME, cls, time);
     }
 
-    /**添加一个定时任务，使用默认的任务组名，触发器名，触发器组名  （带参数）
+    /**
+     * 添加一个定时任务，使用默认的任务组名，触发器名，触发器组名  （带参数）
+     *
      * @param jobName 任务名
-     * @param cls 任务
-     * @param time 时间设置，参考quartz说明文档
+     * @param cls     任务
+     * @param time    时间设置，参考quartz说明文档
      */
-    public static void addJob(String jobName, Class<? extends Job> cls, String time, Map<String,Object> parameter) {
+    public static void addJob(String jobName, Class<? extends Job> cls, String time, Map<String, Object> parameter) {
         addJob(jobName, JOB_GROUP_NAME, jobName, TRIGGER_GROUP_NAME, cls, time, parameter);
     }
 
-    /**添加一个定时任务
-     * @param jobName    任务名
-     * @param jobGroupName    任务组名
-     * @param triggerName    触发器名
-     * @param triggerGroupName    触发器组名
-     * @param jobClass    任务
-     * @param time    时间设置，参考quartz说明文档
+    /**
+     * 添加一个定时任务
+     *
+     * @param jobName          任务名
+     * @param jobGroupName     任务组名
+     * @param triggerName      触发器名
+     * @param triggerGroupName 触发器组名
+     * @param jobClass         任务
+     * @param time             时间设置，参考quartz说明文档
      */
     public static void addJob(String jobName, String jobGroupName,
                               String triggerName, String triggerGroupName, Class<? extends Job> jobClass,
                               String time) {
         try {
             Scheduler sched = gSchedulerFactory.getScheduler();
-            JobDetail jobDetail= JobBuilder.newJob(jobClass).withIdentity(jobName,jobGroupName).build();// 任务名，任务组，任务执行类
-            CronTrigger trigger =  TriggerBuilder     // 触发器
+            JobDetail jobDetail = JobBuilder.newJob(jobClass).withIdentity(jobName, jobGroupName).build();// 任务名，任务组，任务执行类
+            CronTrigger trigger = TriggerBuilder     // 触发器
                     .newTrigger()
                     .withIdentity(triggerName, triggerGroupName)
                     .withSchedule(CronScheduleBuilder.cronSchedule(time))
@@ -61,20 +68,22 @@ public class QuartzManager {
         }
     }
 
-    /**添加一个定时任务  （带参数）
-     * @param jobName    任务名
-     * @param jobGroupName    任务组名
-     * @param triggerName    触发器名
-     * @param triggerGroupName    触发器组名
-     * @param jobClass    任务
-     * @param time    时间设置，参考quartz说明文档
+    /**
+     * 添加一个定时任务  （带参数）
+     *
+     * @param jobName          任务名
+     * @param jobGroupName     任务组名
+     * @param triggerName      触发器名
+     * @param triggerGroupName 触发器组名
+     * @param jobClass         任务
+     * @param time             时间设置，参考quartz说明文档
      */
     public static void addJob(String jobName, String jobGroupName,
                               String triggerName, String triggerGroupName, Class<? extends Job> jobClass,
-                              String time, Map<String,Object> parameter) {
+                              String time, Map<String, Object> parameter) {
         try {
             Scheduler sched = gSchedulerFactory.getScheduler();
-            JobDetail jobDetail= JobBuilder.newJob(jobClass).withIdentity(jobName,jobGroupName).build();// 任务名，任务组，任务执行类
+            JobDetail jobDetail = JobBuilder.newJob(jobClass).withIdentity(jobName, jobGroupName).build();// 任务名，任务组，任务执行类
             jobDetail.getJobDataMap().put("parameterList", parameter);                                //传参数
             CronTrigger trigger = TriggerBuilder     // 触发器
                     .newTrigger()
@@ -90,15 +99,17 @@ public class QuartzManager {
         }
     }
 
-    /** 修改一个任务的触发时间(使用默认的任务组名，触发器名，触发器组名)
-     * @param jobName    任务名
+    /**
+     * 修改一个任务的触发时间(使用默认的任务组名，触发器名，触发器组名)
+     *
+     * @param jobName 任务名
      * @param time    新的时间设置
      */
     public static void modifyJobTime(String jobName, String time) {
         try {
             Scheduler sched = gSchedulerFactory.getScheduler();                              //通过SchedulerFactory构建Scheduler对象
-            TriggerKey triggerKey = TriggerKey.triggerKey(jobName,TRIGGER_GROUP_NAME);         //通过触发器名和组名获取TriggerKey
-            CronTrigger trigger = (CronTrigger)sched.getTrigger(triggerKey);                //通过TriggerKey获取CronTrigger
+            TriggerKey triggerKey = TriggerKey.triggerKey(jobName, TRIGGER_GROUP_NAME);         //通过触发器名和组名获取TriggerKey
+            CronTrigger trigger = (CronTrigger) sched.getTrigger(triggerKey);                //通过TriggerKey获取CronTrigger
             if (trigger == null) {
                 return;
             }
@@ -115,17 +126,19 @@ public class QuartzManager {
         }
     }
 
-    /**修改一个任务的触发时间
-     * @param triggerName    任务名称
-     * @param triggerGroupName    传过来的任务名称
-     * @param time    更新后的时间规则
+    /**
+     * 修改一个任务的触发时间
+     *
+     * @param triggerName      任务名称
+     * @param triggerGroupName 传过来的任务名称
+     * @param time             更新后的时间规则
      */
     public static void modifyJobTime(String triggerName, String triggerGroupName, String time) {
         try {
             Scheduler sched = gSchedulerFactory.getScheduler();                              //通过SchedulerFactory构建Scheduler对象
-            TriggerKey triggerKey = TriggerKey.triggerKey(triggerName,triggerGroupName);     //通过触发器名和组名获取TriggerKey
-            CronTrigger trigger = (CronTrigger)sched.getTrigger(triggerKey);                //通过TriggerKey获取CronTrigger
-            if (trigger == null)  return;
+            TriggerKey triggerKey = TriggerKey.triggerKey(triggerName, triggerGroupName);     //通过触发器名和组名获取TriggerKey
+            CronTrigger trigger = (CronTrigger) sched.getTrigger(triggerKey);                //通过TriggerKey获取CronTrigger
+            if (trigger == null) return;
             CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(trigger.getCronExpression());
             String oldTime = trigger.getCronExpression();
             if (!oldTime.equalsIgnoreCase(time)) {
@@ -141,23 +154,27 @@ public class QuartzManager {
         }
     }
 
-    /**移除一个任务(使用默认的任务组名，触发器名，触发器组名)
-     * @param jobName    任务名称
+    /**
+     * 移除一个任务(使用默认的任务组名，触发器名，触发器组名)
+     *
+     * @param jobName 任务名称
      */
     public static void removeJob(String jobName) {
         removeJob(jobName, JOB_GROUP_NAME, jobName, TRIGGER_GROUP_NAME);
     }
 
-    /**移除一个任务
-     * @param jobName    任务名
-     * @param jobGroupName    任务组名
-     * @param triggerName    触发器名
-     * @param triggerGroupName    触发器组名
+    /**
+     * 移除一个任务
+     *
+     * @param jobName          任务名
+     * @param jobGroupName     任务组名
+     * @param triggerName      触发器名
+     * @param triggerGroupName 触发器组名
      */
-    public static void removeJob(String jobName, String jobGroupName,String triggerName, String triggerGroupName) {
+    public static void removeJob(String jobName, String jobGroupName, String triggerName, String triggerGroupName) {
         try {
             Scheduler sched = gSchedulerFactory.getScheduler();
-            TriggerKey triggerKey = TriggerKey.triggerKey(triggerName,triggerGroupName);     //通过触发器名和组名获取TriggerKey
+            TriggerKey triggerKey = TriggerKey.triggerKey(triggerName, triggerGroupName);     //通过触发器名和组名获取TriggerKey
             JobKey jobKey = JobKey.jobKey(jobName, jobGroupName);                            //通过任务名和组名获取JobKey
             sched.pauseTrigger(triggerKey);    // 停止触发器
             sched.unscheduleJob(triggerKey);// 移除触发器

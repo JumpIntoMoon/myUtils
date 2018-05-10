@@ -1,15 +1,13 @@
+import com.tang.schedule.quartz.TestQuartz;
 import com.tang.schedule.scheduledExecutorService.TestScheduledExecutorService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-
-import java.util.Map;
 
 /**
  * @description: description
@@ -26,6 +24,9 @@ public class testSchedule {
     @Autowired
     private TestScheduledExecutorService testScheduledExecutorService;
 
+    @Autowired
+    private TestQuartz testQuartz;
+
     @Before
     public void getApplicationCtx() {
         //当@RunWith注解和@ContextConfiguration注解失效时可以使用这种方法进行spring测试
@@ -36,5 +37,10 @@ public class testSchedule {
     @Test
     public void testScheduledExecutorService() {
         testScheduledExecutorService.executeSingle();
+    }
+
+    @Test
+    public void testQuartz() {
+        testQuartz.execute("Query persons", "0/5 * * * * ?");
     }
 }

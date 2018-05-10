@@ -15,6 +15,7 @@ import java.util.concurrent.TimeUnit;
  * 1>相比于Timer的单线程，它是通过线程池的方式来执行任务的
  * 2>可以很灵活的去设定第一次执行任务delay时间
  * 3>提供了良好的约定，以便设定执行的时间间隔
+ *
  * @author: tangYiLong
  * @create: 2018-05-09 10:30
  **/
@@ -25,7 +26,7 @@ public class TestScheduledExecutorService {
     private JdbcTemplate jdbcTemplate;
 
     //通过静态方法创建ScheduledExecutorService的实例
-    //多个线程：Executors.newScheduledThreadPool()，单线程：newSingleThreadScheduledExecutor()
+    //多个线程的：Executors.newScheduledThreadPool()，单线程的：newSingleThreadScheduledExecutor()
     private ScheduledExecutorService mScheduledExecutorService = Executors.newScheduledThreadPool(4);
     private ScheduledExecutorService sScheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
 
@@ -77,5 +78,17 @@ public class TestScheduledExecutorService {
             }
             // 第二个参数为首次执行的延时时间，第三个参数为定时执行的间隔时间
         }, 1, 1, TimeUnit.SECONDS);
+    }
+
+    public static void main(String[] args) {
+        ScheduledExecutorService service = Executors
+                .newSingleThreadScheduledExecutor();
+        // 第二个参数为首次执行的延时时间，第三个参数为定时执行的间隔时间
+        service.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("Hello !!");
+            }
+        }, 10, 1, TimeUnit.SECONDS);
     }
 }

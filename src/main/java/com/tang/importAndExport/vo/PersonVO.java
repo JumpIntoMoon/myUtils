@@ -5,7 +5,7 @@ package com.tang.importAndExport.vo;
  * @author: tangYiLong
  * @create: 2018-04-11 11:02
  **/
-public class PersonVO extends BaseVo{
+public class PersonVO extends BaseVo {
     private int id;
     private String name;
     private int age;

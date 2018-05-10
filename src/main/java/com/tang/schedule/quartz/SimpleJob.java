@@ -1,27 +1,29 @@
 package com.tang.schedule.quartz;
 
+import lombok.extern.slf4j.Slf4j;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Map;
 
 /**
  * 被执行的任务类
+ *
  * @author: tangYiLong
  * @create: 2018-05-09 11:13
  **/
-public class SwapJob implements Job {
+@Slf4j
+public class SimpleJob implements Job {
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         //添加具体任务实现
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS");
+        log.debug(sdf.format(new Date()));
         System.out.println(sdf.format(new Date()));
     }
 }

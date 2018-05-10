@@ -7,17 +7,21 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
     <display-name>Archetype Created Web Application</display-name>
+
     <!--**********************************开始配置spring************************************-->
+
     <!--spring自己的配置文件路径-->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath*:applicationContext.xml</param-value>
+        <param-value>classpath*:/applicationContext.xml</param-value>
     </context-param>
+
     <!--配置ContextLoaderListener表示：该工程要以spring的方式启动。
     启动时会默认在/WEB-INF目录下查找上面所配置路径下的applicationContext.xml作为spring容器的配置文件，该文件里可以初始化一些bean-->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
+
     <!--为了能够处理中文的post请求，再配置一个encodingFilter，以避免post请求中文出现乱码情况-->
     <filter>
         <filter-name>encodingFilter</filter-name>
@@ -36,7 +40,10 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
     <!--**********************************配置spring结束************************************-->
+
+
     <!--********************************开始配置spring MVC**********************************-->
+
     <!-- 配置DispatcherServlet表示：该工程将采用springmvc的方式启动。
     启动时也会默认在/WEB-INF目录下查找XXX-servlet.xml作为配置文件，
     XXX就是DispatcherServlet的名字，该文件中将配置两项重要的mvc特性：
@@ -101,6 +108,35 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
     <!--********************************配置spring MVC结束**********************************-->
+
+
+    <!--********************************开始配置log4j**********************************-->
+    <!--Servlet 3.0或更高版本是无需在web.xml中配置log4j的，
+    它默认指定配置文件应命名为log4j2.xml，并要求放置在classpath中，
+    所以在maven项目里，只要在resources目录下新建log4j2.xml文件即可，否则要设置-->
+    <!--<context-param>
+        <param-name>log4jConfiguration</param-name>
+        <param-value>classpath:log4j2.xml</param-value>
+    </context-param>-->
+    <!--如果项目还是基于Servlet 2.x的，
+    官方声明上Log4j2是不支持Servlet 3.0以下版本的，
+    网上有教程称设置监听器和过滤器，这里给出其参考配置-->
+    <!--<listener>
+        <listener-class>org.apache.logging.log4j.web.Log4jServletFilter</listener-class>
+    </listener>
+    <filter>
+        <filter-name>log4jServletFilter</filter-name>
+        <filter-class>org.apache.logging.log4j.web.Log4jServletFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>log4jServletFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+    </filter-mapping>-->
+    <!--********************************配置log4j结束**********************************-->
     <!--首页-->
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>

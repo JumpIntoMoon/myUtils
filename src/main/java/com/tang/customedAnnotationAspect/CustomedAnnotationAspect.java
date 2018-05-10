@@ -42,6 +42,7 @@ public class CustomedAnnotationAspect {
     private void methodPoincut() {
         // 这是一个标记方法
     }
+
     /**
      * 拦截器具体实现，使用了环绕通知
      *
@@ -55,21 +56,22 @@ public class CustomedAnnotationAspect {
         MethodSignature methodSignature = (MethodSignature) signature;
         Method targetMethod = methodSignature.getMethod();
         Class transactionClazz = null;
-        try {if (targetMethod.isAnnotationPresent(CustomedAnnotation.class)) {
-            //获取注解
-            CustomedAnnotation customedAnnotation = targetMethod.getAnnotation(CustomedAnnotation.class);
-            //获取注解传过来的值
-            transactionClazz = customedAnnotation.value();
-            //方法执行前······
-            //do something······
-            result = pjp.proceed();
-            //方法执行后······
-            //do something······
-        }
+        try {
+            if (targetMethod.isAnnotationPresent(CustomedAnnotation.class)) {
+                //获取注解
+                CustomedAnnotation customedAnnotation = targetMethod.getAnnotation(CustomedAnnotation.class);
+                //获取注解传过来的值
+                transactionClazz = customedAnnotation.value();
+                //方法执行前······
+                //do something······
+                result = pjp.proceed();
+                //方法执行后······
+                //do something······
+            }
         } catch (Exception e) {
             //方法执行失败······
             //do something······
-            LOGGER.error(e.getCause().getMessage(),e);
+            LOGGER.error(e.getCause().getMessage(), e);
         }
         return result;
     }
