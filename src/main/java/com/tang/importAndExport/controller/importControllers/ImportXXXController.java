@@ -5,8 +5,7 @@ import com.tang.importAndExport.service.ImportXXXService;
 import com.tang.importAndExport.thread.consumers.ImportXXXConsumer;
 import com.tang.importAndExport.thread.producers.ImportXXXProducer;
 import com.tang.importAndExport.vo.PersonVO;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,11 +17,10 @@ import javax.servlet.http.HttpServletRequest;
  * @author: tangYiLong
  * @create: 2018-04-10 11:34
  **/
+@Slf4j
 @Controller
 @RequestMapping("/importXXX")
 public class ImportXXXController extends ImportFileBaseController {
-    //日志
-    private Log log = LogFactory.getLog(ImportXXXController.class);
     //生产数据线程池大小
     private static final int PRODUCER_POOL_SIZE = 2;
     //处理数据线程池大小

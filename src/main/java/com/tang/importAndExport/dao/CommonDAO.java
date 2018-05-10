@@ -1,8 +1,7 @@
 package com.tang.importAndExport.dao;
 
 import com.tang.importAndExport.vo.PersonVO;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -16,9 +15,8 @@ import java.util.List;
  * @author: tangYiLong
  * @create: 2018-04-11 10:41
  **/
+@Slf4j
 public class CommonDAO {
-    private Log log = LogFactory.getLog(CommonDAO.class);
-
     @Autowired
     private JdbcTemplate jdbcTemplate;
 

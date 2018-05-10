@@ -1,7 +1,6 @@
 package com.tang.customedAnnotationAspect;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
@@ -15,11 +14,8 @@ import java.lang.reflect.Method;
  * @author: tangYiLong
  * @create: 2018-04-16 10:49
  **/
+@Slf4j
 public class CustomedAnnotationAspect {
-    /**
-     * 日志
-     */
-    private static Log LOGGER = LogFactory.getLog(CustomedAnnotationAspect.class);
 
     /**
      * 注解拦截
@@ -71,7 +67,7 @@ public class CustomedAnnotationAspect {
         } catch (Exception e) {
             //方法执行失败······
             //do something······
-            LOGGER.error(e.getCause().getMessage(), e);
+            log.error(e.getCause().getMessage(), e);
         }
         return result;
     }

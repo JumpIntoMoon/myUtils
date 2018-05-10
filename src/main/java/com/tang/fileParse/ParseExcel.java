@@ -1,8 +1,7 @@
 package com.tang.fileParse;
 
 import com.tang.constants.FileTypeEnum;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -21,8 +20,8 @@ import java.util.concurrent.ArrayBlockingQueue;
  * @author: tangYiLong
  * @create: 2018-04-11 10:25
  **/
+@Slf4j
 public class ParseExcel {
-    private static final Log logger = LogFactory.getLog(ParseExcel.class);
 
     /**
      * @param voClass
@@ -72,7 +71,7 @@ public class ParseExcel {
                 queue.put(vo);
             }
         } catch (Exception e) {
-            logger.error("解析EXCEL失败：" + e.getMessage());
+            log.error("解析EXCEL失败：" + e.getMessage());
         } finally {
             try {
                 //关闭流
