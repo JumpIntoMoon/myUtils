@@ -7,7 +7,7 @@ package com.tang.schedule.threadWait;
  * @author: tangYiLong
  * @create: 2018-05-09 10:28
  **/
-public class Test {
+public class TestThreadWait {
     public static void main(String[] args) {
         // run in a second
         final long timeInterval = 1000;

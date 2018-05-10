@@ -10,7 +10,7 @@ import java.util.TimerTask;
  * @author: tangYiLong
  * @create: 2018-05-09 10:14
  **/
-public class Test {
+public class TestTimer {
     public static void main(String[] args) {
         //timer1();
         timer2();

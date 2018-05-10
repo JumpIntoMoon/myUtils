@@ -24,7 +24,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.11</version>
+            <version>4.12</version>
             <scope>test</scope>
         </dependency>
         <!-- spring begin -->
@@ -36,6 +36,11 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
             <version>${spring.version}</version>
         </dependency>
         <dependency>
@@ -94,6 +99,13 @@
             <artifactId>commons-dbcp</artifactId>
             <version>1.4</version>
         </dependency>
+        <!--mysql数据库-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.11</version>
+        </dependency>
+
         <!--操作文件-->
         <dependency>
             <groupId>commons-fileupload</groupId><!--文件上传-->
@@ -131,18 +143,11 @@
             <artifactId>spring-messaging</artifactId>
             <version>${spring.version}</version>
         </dependency>
-        <!--Guava工程包含了若干被Google的 Java项目广泛依赖 的核心库
-        集合 [collections]
-        缓存 [caching]
-        原生类型支持 [primitives support]
-        并发库 [concurrency libraries]
-        通用注解 [common annotations]
-        字符串处理 [string processing]
-        I/O 等等。-->
+        <!--RequestUpgradeStrategy 缺少该包有可能报错-->
         <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>24.1-jre</version>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-websocket</artifactId>
+            <version>9.0.8</version>
         </dependency>
         <!--quartz 定时任务-->
         <dependency>
