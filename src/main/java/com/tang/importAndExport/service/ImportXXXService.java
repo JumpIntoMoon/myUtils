@@ -2,9 +2,11 @@ package com.tang.importAndExport.service;
 
 import com.tang.importAndExport.dao.CommonDAO;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -12,9 +14,11 @@ import java.util.List;
  * @author: tangYiLong
  * @create: 2018-04-11 10:37
  **/
-@Slf4j
-@Resource
+@Service
 public class ImportXXXService {
+
+    private Logger log = LoggerFactory.getLogger(ImportXXXService.class);
+
     @Autowired
     private CommonDAO dao;
 

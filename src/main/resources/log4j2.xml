@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Configuration status="off" monitorInterval="1800">
     <properties>
-        <property name="LOG_HOME">F:\logs</property>
+        <property name="LOG_HOME">D:\logs</property>
         <property name="ERROR_LOG_FILE_NAME">error</property>
     </properties>
 

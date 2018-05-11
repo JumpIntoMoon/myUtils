@@ -2,9 +2,12 @@ package com.tang.importAndExport.dao;
 
 import com.tang.importAndExport.vo.PersonVO;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -15,8 +18,12 @@ import java.util.List;
  * @author: tangYiLong
  * @create: 2018-04-11 10:41
  **/
-@Slf4j
+@Repository
 public class CommonDAO {
+
+    private Logger log = LoggerFactory.getLogger(CommonDAO.class);
+
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
 

@@ -2,6 +2,8 @@ package com.tang.msgPusher.pcMsgPusher.server.websocket;
 
 import com.tang.constants.MsgPusherConstant;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -74,8 +76,9 @@ import java.util.Set;
  * @create: 2018-04-17 16:07
  **/
 @Component
-@Slf4j
 public class MyHandler extends TextWebSocketHandler {
+
+    private Logger log = LoggerFactory.getLogger(MyHandler.class);
 
     //在线用户列表
     private static final Map<Integer, WebSocketSession> users;

@@ -6,6 +6,8 @@ import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
 
@@ -14,8 +16,10 @@ import java.lang.reflect.Method;
  * @author: tangYiLong
  * @create: 2018-04-16 10:49
  **/
-@Slf4j
 public class CustomedAnnotationAspect {
+
+    private Logger log = LoggerFactory.getLogger(CustomedAnnotationAspect.class);
+
 
     /**
      * 注解拦截

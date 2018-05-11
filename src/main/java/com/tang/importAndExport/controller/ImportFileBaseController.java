@@ -1,6 +1,7 @@
 package com.tang.importAndExport.controller;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,10 +21,10 @@ import java.util.concurrent.Executors;
  * @author: tangYiLong
  * @create: 2018-04-10 11:32
  **/
-@Slf4j
 @Controller
 @RequestMapping("/import")
 public class ImportFileBaseController {
+    private Logger log = LoggerFactory.getLogger(ImportFileBaseController.class);
     //文件列表
     private Map<String, MultipartFile> fileStreams = new HashMap();
     //生产数据线程池

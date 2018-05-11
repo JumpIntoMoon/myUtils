@@ -4,7 +4,10 @@ import org.springframework.stereotype.Component;
 
 /**
  * 任务调度类
- *
+ * 任务调度类的启动方式：
+ * 在applicationContext.xml配置定时任务tomcat加载的初始化类，加载时运行execute方法：
+ * <bean id="testQuartz" class="com.tang.schedule.quartz.TestQuartz" init-method="execute"></bean>
+ * 这样在spring容器启动时就会调用该方法
  * @author: tangYiLong
  * @create: 2018-05-09 11:19
  **/
