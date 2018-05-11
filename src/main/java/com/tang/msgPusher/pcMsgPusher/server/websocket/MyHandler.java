@@ -1,7 +1,6 @@
 package com.tang.msgPusher.pcMsgPusher.server.websocket;
 
 import com.tang.constants.MsgPusherConstant;
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -78,14 +77,14 @@ import java.util.Set;
 @Component
 public class MyHandler extends TextWebSocketHandler {
 
-    private Logger log = LoggerFactory.getLogger(MyHandler.class);
-
     //在线用户列表
     private static final Map<Integer, WebSocketSession> users;
 
     static {
         users = new HashMap<>();
     }
+
+    private Logger log = LoggerFactory.getLogger(MyHandler.class);
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {

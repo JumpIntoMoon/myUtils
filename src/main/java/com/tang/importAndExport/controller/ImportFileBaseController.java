@@ -24,6 +24,8 @@ import java.util.concurrent.Executors;
 @Controller
 @RequestMapping("/import")
 public class ImportFileBaseController {
+    //队列中最后一个元素，用来标识队列结束位
+    private static final String lastFlag = "lastFlag";
     private Logger log = LoggerFactory.getLogger(ImportFileBaseController.class);
     //文件列表
     private Map<String, MultipartFile> fileStreams = new HashMap();
@@ -33,8 +35,6 @@ public class ImportFileBaseController {
     private ExecutorService consumerExecutor;
     //有界队列，存储excel中解析出来的vo对象，元素个数大于上限时阻塞
     private ArrayBlockingQueue<Object> producerQueue;
-    //队列中最后一个元素，用来标识队列结束位
-    private static final String lastFlag = "lastFlag";
 
     @RequestMapping("/importAccess")
     public ModelAndView importAccess() {

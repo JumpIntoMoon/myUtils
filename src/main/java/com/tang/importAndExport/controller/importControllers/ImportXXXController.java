@@ -5,7 +5,6 @@ import com.tang.importAndExport.service.ImportXXXService;
 import com.tang.importAndExport.thread.consumers.ImportXXXConsumer;
 import com.tang.importAndExport.thread.producers.ImportXXXProducer;
 import com.tang.importAndExport.vo.PersonVO;
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -22,8 +21,6 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping("/importXXX")
 public class ImportXXXController extends ImportFileBaseController {
-    private Logger log = LoggerFactory.getLogger(ImportXXXController.class);
-
     //生产数据线程池大小
     private static final int PRODUCER_POOL_SIZE = 2;
     //处理数据线程池大小
@@ -32,6 +29,7 @@ public class ImportXXXController extends ImportFileBaseController {
     private static final int QUEUE_SIZE = 100000;
     //批量处理数据条数
     private static final int BATCH_PROCESS_SIZE = 2000;
+    private Logger log = LoggerFactory.getLogger(ImportXXXController.class);
 
     @RequestMapping("/import")
     @ResponseBody

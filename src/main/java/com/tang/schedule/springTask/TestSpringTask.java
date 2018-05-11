@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
  * <task:scheduler id="Scheduler" pool-size="10"/>
  * <!-- 配置定时器注解开关 里面可以配置很多参数，这里只是简单的打开task,并支持@Scheduled -->
  * <task:annotation-driven scheduler="Scheduler" proxy-target-class="true"/>
+ *
  * @author: tangYiLong
  * @create: 2018-05-11 9:22
  **/
@@ -19,8 +20,8 @@ public class TestSpringTask {
     /**
      * 每隔三秒触发一次
      */
-    @Scheduled(cron="0/3 * * * * ?")
-    public void test(){
+    @Scheduled(cron = "0/3 * * * * ?")
+    public void test() {
         System.out.println("task定时任务");
     }
 

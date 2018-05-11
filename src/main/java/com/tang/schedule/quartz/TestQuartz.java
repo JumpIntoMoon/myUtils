@@ -8,11 +8,16 @@ import org.springframework.stereotype.Component;
  * 在applicationContext.xml配置定时任务tomcat加载的初始化类，加载时运行execute方法：
  * <bean id="testQuartz" class="com.tang.schedule.quartz.TestQuartz" init-method="execute"></bean>
  * 这样在spring容器启动时就会调用该方法
+ *
  * @author: tangYiLong
  * @create: 2018-05-09 11:19
  **/
 @Component
 public class TestQuartz {
+
+    public static void main(String[] args) {
+        QuartzManager.addJob("Query persons", SimpleJob.class, "0/5 * * * * ?");
+    }
 
     /**
      * @param jobName job名称
@@ -40,9 +45,5 @@ public class TestQuartz {
         //0 0 12 1/5 * ?            每月的第一个中午开始每隔5天触发一次
         //0 11 11 11 11 ?           每年的11月11号 11点11分触发(光棍节)
         QuartzManager.addJob(jobName, SimpleJob.class, time);
-    }
-
-    public static void main(String[] args) {
-        QuartzManager.addJob("Query persons", SimpleJob.class, "0/5 * * * * ?");
     }
 }

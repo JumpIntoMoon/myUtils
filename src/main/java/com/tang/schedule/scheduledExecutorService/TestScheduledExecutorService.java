@@ -30,6 +30,18 @@ public class TestScheduledExecutorService {
     private ScheduledExecutorService mScheduledExecutorService = Executors.newScheduledThreadPool(4);
     private ScheduledExecutorService sScheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
 
+    public static void main(String[] args) {
+        ScheduledExecutorService service = Executors
+                .newSingleThreadScheduledExecutor();
+        // 第二个参数为首次执行的延时时间，第三个参数为定时执行的间隔时间
+        service.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("Hello !!");
+            }
+        }, 10, 1, TimeUnit.SECONDS);
+    }
+
     public void executeSingle() {
         final Map map = jdbcTemplate.queryForMap("select * from person limit 1");
         //单线程池的循环任务
@@ -78,17 +90,5 @@ public class TestScheduledExecutorService {
             }
             // 第二个参数为首次执行的延时时间，第三个参数为定时执行的间隔时间
         }, 1, 1, TimeUnit.SECONDS);
-    }
-
-    public static void main(String[] args) {
-        ScheduledExecutorService service = Executors
-                .newSingleThreadScheduledExecutor();
-        // 第二个参数为首次执行的延时时间，第三个参数为定时执行的间隔时间
-        service.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-                System.out.println("Hello !!");
-            }
-        }, 10, 1, TimeUnit.SECONDS);
     }
 }
