@@ -61,7 +61,7 @@ public class ParseExcel {
                     if (null == cell) {
                         cell = row.createCell(index);
                     }
-                    cell.setCellType(Cell.CELL_TYPE_STRING);
+                    //cell.setCellType(Cell.CELL_TYPE_STRING);
                     String value = null == cell.getStringCellValue() ? "" : cell.getStringCellValue().trim();
                     Field field = fields[index];
                     String fieldName = field.getName();
